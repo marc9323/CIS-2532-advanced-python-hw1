@@ -63,7 +63,7 @@ def create_shape_string(shapeList):
     """  create a string with shapes and volumes
     This string will be passed to console and file output
     methods """
-    shapeString = "" #f"{'=' * 60}\n"
+    shapeString = ""
     for theShape in enumerate(shapeList):
         if not(isinstance(theShape[1], Cube)):
             theShape[1].find_area()
@@ -131,7 +131,6 @@ def input_shape_filename():
     return input("Enter a filename please:  ")
 
 
-
 def main():
     """  main method - main loop for the program """
     while True:
@@ -160,12 +159,9 @@ def main():
         else:
             print("Please make a valid selection.")
 
-
-
-
-
-main()
-
+#  execute the main method and run the program
+if __name__ == "__main__":
+    main()
 
 
 
