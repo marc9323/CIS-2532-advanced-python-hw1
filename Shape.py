@@ -12,24 +12,29 @@ Shape2D and Shape3D
 
 """
 
-from abc import ABC, abstractmethod, abstractproperty
+#  add a static member to track total - each Shape class knows how many there are!
+from abc import ABC, abstractmethod
 from math import pi
 from aenum import Enum  #  pip install aenum
 
 
-class Color(Enum):
-    RED = 1, "red"
-    GREEN = 2, "green"
-    YELLOW = 3, "yellow"
-    BLUE = 4, "blue"
-    PURPLE = 5, "purple"
+# class Color(Enum):
+#     RED = 1, "red"
+#     GREEN = 2, "green"
+#     YELLOW = 3, "yellow"
+#     BLUE = 4, "blue"
+#     PURPLE = 5, "purple"
 
 
 class Shape(ABC):
     """ Abstract base class for Shape hierarchy"""
 
-    def __init__(self, color=Color.RED):
+    #  static member is inherited, tracks object count
+    OBJECT_COUNT = 0  # caps to indicate static method vs instance variable
+
+    def __init__(self, color="Red"):
         self.__color = color
+        Shape.OBJECT_COUNT += 1
 
     @abstractmethod
     def find_area(self):
@@ -55,7 +60,7 @@ class Shape(ABC):
 
 class Circle(Shape):
     """  Circle class inherits from abstract class Shape"""
-    def __init__(self, radius=1, color=Color.RED):
+    def __init__(self, radius=1, color="Red"):  # switch order of arguments
         super().__init__(color)
         #  use the setter so as not to duplicate validation code
         self.set_radius(radius)
@@ -67,7 +72,7 @@ class Circle(Shape):
 
     def find_volume(self):
         """  a circle has no volume"""
-        pass
+        pass  # do nothing
 
     def get_radius(self):
         """ getter returns radius of the circle """
@@ -88,12 +93,13 @@ class Circle(Shape):
         """ display Shape name and area """
         #  use __class__.__name__ so code works if we change the name
         #  of our class
-        return f"{self.get_color().name} Circle with area {self.__area:.2f}"
+        #  get the color name as a string
+        return f"{self.get_color()} {self.__class__.__name__} with area {self.__area:.2f}"
 
 
 class Square(Shape):
     """ Square class inherits from abstract class Shape """
-    def __init__(self, side=2.3, color=Color.RED):
+    def __init__(self, side=2.3, color="Red"):
         super().__init__(color)
         self.set_side(side)
 
@@ -122,7 +128,7 @@ class Square(Shape):
     # Override
     def display(self):
         """ displays data for the shape """
-        return f"{self.get_color().name} Square with area {self.__area:.2f}"
+        return f"{self.get_color()} {self.__class__.__name__} with area {self.__area:.2f}"
 
 
 #  for a cube the lenth, width, and height are all the same
@@ -130,7 +136,7 @@ class Cube(Shape):
     """ Cube class inherits from abstract class Shape """
     NO_OF_SIDES = 6 # a cube has six sides
 
-    def __init__(self, edge=1, color=Color.RED):
+    def __init__(self, edge=1, color="Red"):
         super().__init__(color)
         self.set_edge(edge)
 
@@ -159,13 +165,6 @@ class Cube(Shape):
 
     # Override
     def display(self):
-        return f"{self.get_color().name} Cube with volume {self.__volume:.2f}"
+        return f"{self.get_color()} {self.__class__.__name__} with volume {self.__volume:.2f}"
 
-
-a = Circle(color=Color.GREEN)
-b = Square(color=Color.BLUE)
-# b = Cube(color=Color.BLUE)
-print(b.display())
-a.set_color(Color.RED)
-print(a.get_color().value)
 

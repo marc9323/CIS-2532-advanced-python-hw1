@@ -8,6 +8,14 @@ Assignment Content:
 'Shape.py' - Inheritance hierarchy based on abstract class
 'main.py' - this file, main ( and supporting ) methods
 
+'Hmwk1_output_Holman.txt' - text file output
+'Hmwk#1_Screenshot.PNG' '- screenshot of output for console, file, and GUI.
+Everything is pictured inside the IDE.
+'Hmwk1_UML_Holman.txt' - UML diagrams - I used PynSource to generate the UML.
+'Hmwk1_Report_Holman.txt' - Learning Report Summary
+
+
+
 """
 
 from Shape import Shape, Circle, Square, Cube
@@ -26,35 +34,27 @@ FRESH = 'd'
 #  total number of shapes to create
 NUMBER_OF_SHAPES = 15
 
-#  used to hold the total values for how many of each
-#  shape were created
-@dataclass
-class ShapeCounter:
-    circle: int
-    square: int
-    cube: int
-
-
 def create_shape_list():
     """  create a list of shapes, with type for each shape being
     determined randomly.  Track total number of each type created
     return the list and the counter  """
     # list of shapes
     shapeList = []
-    shapeCounter = ShapeCounter(0, 0, 0)
+    shapeCounter = {"circle": 0, "square": 0, "cube": 0}
     for index in range(NUMBER_OF_SHAPES):
         # get a random number 1-3
-        randNum = random.randrange(1, 4)
+        shapeNum = random.randrange(1, 4)
         #  choose a shape type based on randNum and append to the list
-        if randNum == 1:
+        if shapeNum == 1:
+            # create & append appropriate shape to list, increment count
             shapeList.append(Circle())
-            shapeCounter.circle += 1
-        elif randNum == 2:
+            shapeCounter["circle"] += 1
+        elif shapeNum == 2:
             shapeList.append(Square())
-            shapeCounter.square += 1
+            shapeCounter["square"] += 1
         else:
             shapeList.append(Cube())
-            shapeCounter.cube += 1
+            shapeCounter["cube"] += 1
 
     return shapeList, shapeCounter
 
@@ -63,14 +63,17 @@ def create_shape_string(shapeList):
     """  create a string with shapes and volumes
     This string will be passed to console and file output
     methods """
+    numFieldLength = 3
     shapeString = ""
     for theShape in enumerate(shapeList):
+        # if it's not a cube, find the area
         if not(isinstance(theShape[1], Cube)):
             theShape[1].find_area()
-            shapeString += f"{theShape[0]},) {theShape[1].display()}\n"
+            shapeString += f"{theShape[0]:<3} {theShape[1].display()}\n"
         else:
+            #  otherwise, find volume
             theShape[1].find_volume()
-            shapeString += f"{theShape[0]},) {theShape[1].display()}\n"
+            shapeString += f"{theShape[0]:<3} {theShape[1].display()}\n"
     return shapeString
 
 
@@ -92,12 +95,12 @@ def display_shape_gui(shapeList, shapeString):
     messagebox.showinfo("SHAPE LIST", shapeString)
 
 
-def display_pie_chart(shapeList, shapeCounter):
+def display_pie_chart(shapeList):
     """  show a pie chart for the number of each shape created """
     #  create a list of shape totals
-    shapeTotals = [shapeCounter.circle, shapeCounter.square, shapeCounter.cube]
+    shapeTotals = [Circle.OBJECT_COUNT, Square.OBJECT_COUNT, Cube.OBJECT_COUNT]
     #  create a list of labels for the slices
-    slice_labels=['Circles', 'Squares', 'Cubes']
+    slice_labels = ['Circles', 'Squares', 'Cubes']
     # create a pie chart from the values
     plt.pie(shapeTotals, labels=slice_labels)
     #  add a title
@@ -145,14 +148,14 @@ def main():
         #  branch based on user selection
         if choice == CONSOLE:  # console output
             output_shapestring_console(shapeString)
-            display_pie_chart(shapeList, shapeCounter)
+            display_pie_chart(shapeList)
         elif choice == TEXT_FILE:  #  output to text file
             filename = input_shape_filename()
             output_shapestring_file(shapeString, filename)
-            display_pie_chart(shapeList, shapeCounter)
+            display_pie_chart(shapeList)
         elif choice == GUI:  # output to GUI
             display_shape_gui(shapeList, shapeString)
-            display_pie_chart(shapeList, shapeCounter)
+            display_pie_chart(shapeList)
         elif choice == 'q':
             #  break out of the loop, program will terminate
             break

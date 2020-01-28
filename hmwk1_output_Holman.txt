@@ -1,0 +1,15 @@
+0   Red Circle with area 3.14
+1   Red Cube with volume 1.00
+2   Red Cube with volume 1.00
+3   Red Square with area 5.29
+4   Red Square with area 5.29
+5   Red Square with area 5.29
+6   Red Cube with volume 1.00
+7   Red Circle with area 3.14
+8   Red Circle with area 3.14
+9   Red Square with area 5.29
+10  Red Cube with volume 1.00
+11  Red Square with area 5.29
+12  Red Square with area 5.29
+13  Red Cube with volume 1.00
+14  Red Square with area 5.29
