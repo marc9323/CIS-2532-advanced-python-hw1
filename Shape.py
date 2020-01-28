@@ -121,10 +121,10 @@ class Square(Shape):
         return f"{self.get_color()} {self.__class__.__name__} with area {self.__area:.2f}"
 
 
-#  for a cube the lenth, width, and height are all the same
+#  for a cube the length, width, and height are all the same
 class Cube(Shape):
     """ Cube class inherits from abstract class Shape """
-    NO_OF_SIDES = 6 # a cube has six sides
+    NO_OF_SIDES = 6  # a cube has six sides
 
     def __init__(self, edge=1, color="Red"):
         super().__init__(color)
@@ -155,6 +155,7 @@ class Cube(Shape):
 
     # Override
     def display(self):
+        """  displays data for the shape """
         return f"{self.get_color()} {self.__class__.__name__} with volume {self.__volume:.2f}"
 
 
