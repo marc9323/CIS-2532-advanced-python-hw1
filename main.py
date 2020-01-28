@@ -8,10 +8,10 @@ Assignment Content:
 'Shape.py' - Inheritance hierarchy based on abstract class
 'main.py' - this file, main ( and supporting ) methods
 
-'Hmwk1_output_Holman.txt' - text file output
+'Hmwk1_file_output_Holman.txt' - text file output
 'Hmwk#1_Screenshot.PNG' '- screenshot of output for console, file, and GUI.
 Everything is pictured inside the IDE.
-'Hmwk1_UML_Holman.txt' - UML diagrams - I used PynSource to generate the UML.
+'Hmwk1_UML_Holman.png' - UML diagram - I used PynSource to generate the UML.
 'Hmwk1_Report_Holman.txt' - Learning Report Summary
 
 
@@ -161,6 +161,7 @@ def main():
             break
         else:
             print("Please make a valid selection.")
+
 
 #  execute the main method and run the program
 if __name__ == "__main__":

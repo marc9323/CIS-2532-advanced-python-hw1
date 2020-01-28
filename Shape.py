@@ -12,18 +12,8 @@ Shape2D and Shape3D
 
 """
 
-#  add a static member to track total - each Shape class knows how many there are!
 from abc import ABC, abstractmethod
 from math import pi
-from aenum import Enum  #  pip install aenum
-
-
-# class Color(Enum):
-#     RED = 1, "red"
-#     GREEN = 2, "green"
-#     YELLOW = 3, "yellow"
-#     BLUE = 4, "blue"
-#     PURPLE = 5, "purple"
 
 
 class Shape(ABC):
